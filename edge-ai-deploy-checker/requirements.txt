@@ -1,0 +1,4 @@
+# Core - no mandatory dependencies for basic usage
+# Optional dependencies for model parsing:
+# pip install tensorflow   # for TFLite model parsing
+# pip install onnx         # for ONNX model parsing

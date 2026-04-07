@@ -1,0 +1,130 @@
+{
+  "devices": {
+    "rpi4": {
+      "name": "Raspberry Pi 4 (4GB)",
+      "ram_mb": 4096,
+      "cpu": "ARM Cortex-A72",
+      "cores": 4,
+      "freq_ghz": 1.5,
+      "arch": "aarch64",
+      "gops": 13.5,
+      "gpu": null,
+      "npu": null,
+      "tdp_watts": 7.5,
+      "max_temp_c": 85,
+      "supported_frameworks": ["tflite", "onnxruntime"],
+      "os_overhead_mb": 800,
+      "notes": "Passive cooling recommended for sustained inference"
+    },
+    "rpi5": {
+      "name": "Raspberry Pi 5 (8GB)",
+      "ram_mb": 8192,
+      "cpu": "ARM Cortex-A76",
+      "cores": 4,
+      "freq_ghz": 2.4,
+      "arch": "aarch64",
+      "gops": 32,
+      "gpu": null,
+      "npu": null,
+      "tdp_watts": 12,
+      "max_temp_c": 85,
+      "supported_frameworks": ["tflite", "onnxruntime", "openvino"],
+      "os_overhead_mb": 1000,
+      "notes": "Active cooling recommended for sustained workloads"
+    },
+    "jetson-nano": {
+      "name": "NVIDIA Jetson Nano",
+      "ram_mb": 4096,
+      "cpu": "ARM Cortex-A57",
+      "cores": 4,
+      "freq_ghz": 1.43,
+      "arch": "aarch64",
+      "gops": 11,
+      "gpu": {
+        "name": "128-core Maxwell",
+        "gflops": 472,
+        "memory_shared": true
+      },
+      "npu": null,
+      "tdp_watts": 10,
+      "max_temp_c": 97,
+      "supported_frameworks": ["tflite", "onnxruntime", "tensorrt"],
+      "os_overhead_mb": 1200,
+      "notes": "GPU delegate significantly improves inference speed"
+    },
+    "jetson-orin-nano": {
+      "name": "NVIDIA Jetson Orin Nano",
+      "ram_mb": 8192,
+      "cpu": "ARM Cortex-A78AE",
+      "cores": 6,
+      "freq_ghz": 1.5,
+      "arch": "aarch64",
+      "gops": 18,
+      "gpu": {
+        "name": "1024-core Ampere",
+        "gflops": 625,
+        "memory_shared": true
+      },
+      "npu": {
+        "name": "NVDLA",
+        "tops": 40
+      },
+      "tdp_watts": 15,
+      "max_temp_c": 95,
+      "supported_frameworks": ["tflite", "onnxruntime", "tensorrt"],
+      "os_overhead_mb": 1500,
+      "notes": "Best performance with TensorRT optimisation"
+    },
+    "coral": {
+      "name": "Google Coral Dev Board",
+      "ram_mb": 1024,
+      "cpu": "ARM Cortex-A53",
+      "cores": 4,
+      "freq_ghz": 1.5,
+      "arch": "aarch64",
+      "gops": 4.8,
+      "gpu": null,
+      "npu": {
+        "name": "Edge TPU",
+        "tops": 4
+      },
+      "tdp_watts": 5,
+      "max_temp_c": 85,
+      "supported_frameworks": ["tflite"],
+      "os_overhead_mb": 400,
+      "notes": "Edge TPU only supports fully quantised INT8 models"
+    },
+    "arm-a53": {
+      "name": "Generic ARM Cortex-A53",
+      "ram_mb": 1024,
+      "cpu": "ARM Cortex-A53",
+      "cores": 4,
+      "freq_ghz": 1.2,
+      "arch": "aarch64",
+      "gops": 4.8,
+      "gpu": null,
+      "npu": null,
+      "tdp_watts": 3,
+      "max_temp_c": 85,
+      "supported_frameworks": ["tflite", "onnxruntime"],
+      "os_overhead_mb": 300,
+      "notes": "Low power, suitable for always-on inference at low throughput"
+    },
+    "arm-a72": {
+      "name": "Generic ARM Cortex-A72",
+      "ram_mb": 2048,
+      "cpu": "ARM Cortex-A72",
+      "cores": 4,
+      "freq_ghz": 1.8,
+      "arch": "aarch64",
+      "gops": 16,
+      "gpu": null,
+      "npu": null,
+      "tdp_watts": 5,
+      "max_temp_c": 85,
+      "supported_frameworks": ["tflite", "onnxruntime"],
+      "os_overhead_mb": 500,
+      "notes": "Good balance of performance and power for mid-range edge devices"
+    }
+  }
+}
