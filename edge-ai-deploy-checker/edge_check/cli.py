@@ -12,6 +12,7 @@ import sys
 from .model_parser import parse_model
 from .device_profiles import get_device, list_devices, create_custom_device
 from .memory_check import check_memory
+from .compute_check import check_compute
 
 
 def print_header():
@@ -38,6 +39,7 @@ def main():
     parser.add_argument("--cpu", type=str, help="Custom device CPU name")
     parser.add_argument("--cores", type=int, default=4, help="Custom device CPU cores")
     parser.add_argument("--freq", type=float, default=1.5, help="Custom device CPU frequency (GHz)")
+    parser.add_argument("--fps", type=int, default=30, help="Target framerate for real-time check (default: 30)")
     parser.add_argument("--report", type=str, help="Save report to JSON file")
     parser.add_argument("--version", action="version", version="edge-check 0.1.0")
 
@@ -61,7 +63,7 @@ def main():
         parser.print_help()
         sys.exit(1)
 
-    # Get or create device profile
+    # create device profile
     device = None
     if args.device:
         device = get_device(args.device)
@@ -106,14 +108,23 @@ def main():
     print(mem_result.summary())
     print()
 
+    # Compute check
+    print_section("Compute Check")
+    compute_result = check_compute(model, device, target_fps=args.fps)
+    print(compute_result.summary())
+    print()
+
     # Results summary
-    checks_passed = sum([mem_result.passed])
-    total_checks = 1  # will grow as more modules are added
+    results = [mem_result.passed, compute_result.passed]
+    checks_passed = sum(results)
+    total_checks = len(results)
 
     print("═" * 55)
     print(f"  RESULT: {checks_passed}/{total_checks} checks passed")
     if checks_passed < total_checks:
         print(f"  {total_checks - checks_passed} issue(s) to resolve")
+    else:
+        print("  Model is ready for deployment on this device")
     print("═" * 55)
     print()
 
